@@ -18,14 +18,14 @@ import { UserEntity } from 'src/user/entities/user.entity';
 import { ManyToOne, OneToOne } from 'typeorm';
 
 export class CreateDoctorDto extends UserSubscribeDto {
-  /*
+  
 
   @IsNotEmpty({ message : 'Speciality is required for doctors.'})
   @ManyToOne(
     type => SpecialityEntity,
     (speciality)=> speciality.doctors ,
    )
-   speciality :SpecialityEntity ;*/
+   speciality :SpecialityEntity ;
 
   @IsOptional()
   @Type(() => Number)

@@ -24,6 +24,7 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
   async create(
     createConsultationDto: CreateConsultationDto,
   ): Promise<ConsultationEntity> {
+    
     return await this.consultationRepository.save(createConsultationDto);
   }
   async getAcceptedConsultation (id : string): Promise<ConsultationEntity[]>{

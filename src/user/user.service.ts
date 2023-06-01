@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { Brackets, Repository } from 'typeorm';
+import {  Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -13,12 +13,7 @@ import { UserEntity } from './entities/user.entity';
 import { RoleEnum } from '../Enums/role.enum';
 import { GenericCrudService } from '../Generics/service/generic-crud.service';
 import { DoctorService } from '../doctor/doctor.service';
-import { SpecialityService } from '../speciality/speciality.service';
 import { SpecialityEntity } from '../speciality/entities/speciality.entity';
-import { CreateDoctorDto } from '../doctor/dto/create-doctor.dto';
-import { DoctorEntity } from '../doctor/entities/doctor.entity';
-import { OnEvent } from '@nestjs/event-emitter';
-import { ConsultationEntity } from 'src/consultation/entities/consultation.entity';
 
 @Injectable()
 export class UserService extends GenericCrudService<UserEntity> {
