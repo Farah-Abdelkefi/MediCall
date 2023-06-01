@@ -1,12 +1,7 @@
 import { RoleEnum } from 'src/Enums/role.enum';
 import { TimestampEntity } from 'src/Generics/timestamp.entity';
 import { ConsultationEntity } from 'src/consultation/entities/consultation.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'user' })
 export class UserEntity extends TimestampEntity {

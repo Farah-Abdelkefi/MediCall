@@ -9,7 +9,6 @@ export class AppService {
 }
 @Resolver()
 export class FooResolver {
-
   @Query(() => String)
   sayHello(): string {
     return 'Hello World!';

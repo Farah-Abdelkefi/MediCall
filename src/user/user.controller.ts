@@ -1,4 +1,12 @@
-import { Body, Controller, Param, Post,Get, Delete, Patch } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Post,
+  Get,
+  Delete,
+  Patch,
+} from '@nestjs/common';
 import { UserSubscribeDto } from './dto/user-subscribe.dto';
 import { UserService } from './user.service';
 import { LoginCredentialsDto } from './dto/login-credentials.dto';
@@ -27,7 +35,7 @@ export class UserController {
     return this.userService.login(credentials);
   }
   @Get('/:id')
-  FindById(@Param('id') id : string):Promise<UserEntity>{
+  FindById(@Param('id') id: string): Promise<UserEntity> {
     return this.userService.findOne(id);
   }
   @Patch(':id')
@@ -45,4 +53,3 @@ export class UserController {
     return this.userService.restore(id);
   }
 }
-

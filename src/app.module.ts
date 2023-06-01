@@ -26,7 +26,7 @@ import { UserModule } from './user/user.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'projet-nest',
+      database: 'projet-nest1',
       entities: [
         DoctorEntity,
         SpecialityEntity,
@@ -34,7 +34,7 @@ import { UserModule } from './user/user.module';
         ConsultationEntity,
       ],
       synchronize: true,
-    })
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

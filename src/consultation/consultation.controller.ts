@@ -13,12 +13,9 @@ import { CreateConsultationDto } from './dto/create-consultation.dto';
 import { UpdateConsultationDto } from './dto/update-consultation.dto';
 import { ConsultationEntity } from './entities/consultation.entity';
 
-
 @Controller('consultation')
 export class ConsultationController {
-  constructor(private readonly consultationService: ConsultationService,
-    
-    ) {}
+  constructor(private readonly consultationService: ConsultationService) {}
 
   @Post()
   create(@Body() createConsultationDto: CreateConsultationDto) {
@@ -26,20 +23,22 @@ export class ConsultationController {
   }
 
   @Get()
-  findAll() : Promise<ConsultationEntity[]> {
+  findAll(): Promise<ConsultationEntity[]> {
     return this.consultationService.findAll();
   }
 
   @Get('/docteranduser')
-  findByDocterandUser(@Body() consult: CreateConsultationDto): Promise<ConsultationEntity> {
+  findByDocterandUser(
+    @Body() consult: CreateConsultationDto,
+  ): Promise<ConsultationEntity> {
     return this.consultationService.findBydocterandbyuser(consult);
   }
   @Get('accepted/:id')
-  getAcceptedConsultation (@Param('id') id : string){
+  getAcceptedConsultation(@Param('id') id: string) {
     return this.consultationService.getAcceptedConsultation(id);
   }
-  @Get("requests/:id")
-  getRequests(@Param('id') id : string){
+  @Get('requests/:id')
+  getRequests(@Param('id') id: string) {
     return this.consultationService.getRequests(id);
   }
 
@@ -62,5 +61,4 @@ export class ConsultationController {
   restore(@Param('id') id: string) {
     return this.consultationService.restore(id);
   }
-
 }

@@ -3,7 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import {  Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -85,7 +85,7 @@ export class UserService extends GenericCrudService<UserEntity> {
       const payload = {
         id: user.id,
         role: user.role,
-        authentificated: true,
+        authenticated: true,
       };
       const jwt = await this.jwtService.sign(payload);
       return { access_token: jwt };
@@ -93,5 +93,4 @@ export class UserService extends GenericCrudService<UserEntity> {
       throw new NotFoundException('username or password incorrect');
     }
   }
-  
 }
