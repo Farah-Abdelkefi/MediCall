@@ -6,7 +6,7 @@ import { DoctorEntity } from '../../doctor/entities/doctor.entity';
 @Entity('consultation')
 export class ConsultationEntity extends TimestampEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: String;
+  id: string;
 
   @Column()
   channel: string;

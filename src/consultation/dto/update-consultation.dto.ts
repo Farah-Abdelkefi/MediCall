@@ -7,7 +7,7 @@ export class UpdateConsultationDto extends PartialType(CreateConsultationDto) {
  
 
   @Optional()
-  @IsDate()
+ @IsDate()
   date: Date;
 
 }

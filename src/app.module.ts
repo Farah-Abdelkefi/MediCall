@@ -10,9 +10,8 @@ import { SpecialityEntity } from './speciality/entities/speciality.entity';
 import { ConsultationEntity } from './consultation/entities/consultation.entity';
 import { UserEntity } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver,ApolloDriverConfig } from "@nestjs/apollo";
-import { PubSub } from 'graphql-subscriptions';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+
 @Module({
   imports: [
     DoctorModule,
@@ -37,14 +36,9 @@ import { PubSub } from 'graphql-subscriptions';
       ],
       synchronize: true,
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
-      // subscriptions :   ,
-      context: ({ req }) => ({ req }),
-    }),
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
-  providers: [AppService , FooResolver],
+  providers: [AppService],
 })
 export class AppModule {}

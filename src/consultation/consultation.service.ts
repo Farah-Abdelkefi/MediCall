@@ -9,16 +9,14 @@ import { ConsultationEntity } from './entities/consultation.entity';
 import { CreateConsultationDto } from './dto/create-consultation.dto';
 import { UpdateConsultationDto } from './dto/update-consultation.dto';
 import { RtcTokenBuilder, RtcRole } from "agora-token";
-import { PubSub } from 'graphql-subscriptions';
-import { log } from 'console';
 
 
 @Injectable()
 export class ConsultationService extends GenericCrudService<ConsultationEntity> {
-  pubSub: PubSub ;
+ 
   constructor(
     @InjectRepository(ConsultationEntity)
-    private consultationRepository: Repository<ConsultationEntity>,
+    private consultationRepository: Repository<ConsultationEntity>
   ) {
     super(consultationRepository);
   }
@@ -59,15 +57,10 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
     if ( !q){
       throw new NotFoundException ("couldn't update date ");
     }
-    //this.pubSub.publish('consultationAccepted', { consultationAccepted: q });
-    return this.generateToken(con);
+    return  this.generateToken(con);
     
   }
-  // get (id : string){
-  //   const con = await this.findOne(id);
-  //   const patient = this.userRepositor
-  // }
-
+ 
  generateToken (con : ConsultationEntity) {
     // Rtc Examples
     const appId = '579dcf9764df40d2b0d5dd2571e659b1';

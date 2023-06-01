@@ -21,16 +21,7 @@ import { notEmpty, length } from 'src/Generics/error-messages';
 import { SpecialityEntity } from 'src/speciality/entities/speciality.entity';
 import { ManyToOne } from 'typeorm';
 
-@ValidatorConstraint({ name: 'requiredIfRoleIsDoctor', async: false })
-export class RequiredIfRoleIsDoctor implements ValidatorConstraintInterface {
-  validate(value: any, args: any): boolean {
-    return args.role === RoleEnum.DOCTOR ? value !== undefined : true;
-  }
 
-  defaultMessage(args: ValidationArguments): string {
-    return 'Speciality is required for doctors.';
-  }
-}
 
 export class UserSubscribeDto {
   @IsNotEmpty({ message: (validationData) => notEmpty(validationData) })

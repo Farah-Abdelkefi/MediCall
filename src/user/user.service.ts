@@ -17,6 +17,8 @@ import { SpecialityService } from '../speciality/speciality.service';
 import { SpecialityEntity } from '../speciality/entities/speciality.entity';
 import { CreateDoctorDto } from '../doctor/dto/create-doctor.dto';
 import { DoctorEntity } from '../doctor/entities/doctor.entity';
+import { OnEvent } from '@nestjs/event-emitter';
+import { ConsultationEntity } from 'src/consultation/entities/consultation.entity';
 
 @Injectable()
 export class UserService extends GenericCrudService<UserEntity> {
@@ -96,4 +98,5 @@ export class UserService extends GenericCrudService<UserEntity> {
       throw new NotFoundException('username or password incorrect');
     }
   }
+  
 }

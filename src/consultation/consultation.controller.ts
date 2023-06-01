@@ -31,14 +31,14 @@ export class ConsultationController {
     return this.consultationService.findAll();
   }
 
-  @Get('accepted/:id')
-  getAcceptedConsultation (@Param('id') id : string){
-    return this.consultationService.getAcceptedConsultation(id);
-  }
-  @Get("requests/:id")
-  getRequests(@Param('id') id : string){
-    return this.consultationService.getRequests(id);
-  }
+  // @Get('accepted/:id')
+  // getAcceptedConsultation (@Param('id') id : string){
+  //   return this.consultationService.getAcceptedConsultation(id);
+  // }
+  // @Get("requests/:id")
+  // getRequests(@Param('id') id : string){
+  //   return this.consultationService.getRequests(id);
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
