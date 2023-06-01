@@ -10,7 +10,6 @@ import { SpecialityEntity } from './speciality/entities/speciality.entity';
 import { ConsultationEntity } from './consultation/entities/consultation.entity';
 import { UserEntity } from './user/entities/user.entity';
 import { UserModule } from './user/user.module';
-import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -35,8 +34,7 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
         ConsultationEntity,
       ],
       synchronize: true,
-    }),
-    EventEmitterModule.forRoot(),
+    })
   ],
   controllers: [AppController],
   providers: [AppService],
