@@ -8,11 +8,10 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { UserSubscribeDto } from 'src/user/dto/user-subscribe.dto';
-import { LoginCredentialsDto } from 'src/user/dto/login-credentials.dto';
 import { ConsultationService } from './consultation.service';
 import { CreateConsultationDto } from './dto/create-consultation.dto';
 import { UpdateConsultationDto } from './dto/update-consultation.dto';
+import { ConsultationEntity } from './entities/consultation.entity';
 
 
 @Controller('consultation')
@@ -27,10 +26,14 @@ export class ConsultationController {
   }
 
   @Get()
-  findAll() {
+  findAll() : Promise<ConsultationEntity[]> {
     return this.consultationService.findAll();
   }
 
+  @Get('/docteranduser')
+  findByDocterandUser(@Body() consult: CreateConsultationDto): Promise<ConsultationEntity> {
+    return this.consultationService.findBydocterandbyuser(consult);
+  }
   @Get('accepted/:id')
   getAcceptedConsultation (@Param('id') id : string){
     return this.consultationService.getAcceptedConsultation(id);

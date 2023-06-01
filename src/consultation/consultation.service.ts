@@ -9,6 +9,7 @@ import { ConsultationEntity } from './entities/consultation.entity';
 import { CreateConsultationDto } from './dto/create-consultation.dto';
 import { UpdateConsultationDto } from './dto/update-consultation.dto';
 import { RtcTokenBuilder, RtcRole } from "agora-token";
+import { channel } from 'diagnostics_channel';
 
 
 @Injectable()
@@ -21,12 +22,40 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
     super(consultationRepository);
   }
 
+  async getNumberConsultations() : Promise <number> {
+    const c = await this.consultationRepository 
+      .createQueryBuilder('c')
+      .getCount();
+    return c ;
+  }
   async create(
     createConsultationDto: CreateConsultationDto,
   ): Promise<ConsultationEntity> {
-    
-    return await this.consultationRepository.save(createConsultationDto);
+    const c = await (this.getNumberConsultations())+1;
+    const chan = "channel" + c;
+    const con = {
+      channel : chan,
+      doctor : createConsultationDto.doctor,
+      patient : createConsultationDto.patient
+    };
+    return await this.consultationRepository.save(con);
   }
+
+  async findBydocterandbyuser(con : CreateConsultationDto ) : Promise <ConsultationEntity>
+  {
+    const element = await this.consultationRepository
+      .createQueryBuilder('c')
+      .where('c.doctorId = :iddoctor', { iddoctor: con.doctor })
+      .andWhere('c.patientId= :iduser', { iduser: con.patient })
+      .getOne();
+
+    if (!element) {
+      throw new NotFoundException('not found');
+    }
+    return element;
+    
+  }
+
   async getAcceptedConsultation (id : string): Promise<ConsultationEntity[]>{
     const con = await this.consultationRepository
     .createQueryBuilder('s')
