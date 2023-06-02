@@ -58,10 +58,10 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
 
   async getAcceptedConsultation (id : string): Promise<ConsultationEntity[]>{
     const con = await this.consultationRepository
-    .createQueryBuilder('s')
-    .where("s.acceptee = 1 AND ((s.patient = :id) OR (s.doctor = :id) ) ", {id : id})
-    .getMany();
-    
+    .createQueryBuilder('c')
+    .where("c.acceptee = 1 AND ((c.patient = :id) OR (c.doctor = :id) ) ", {id : id})
+    //.getRawMany();
+    .getRawMany();
     if (!con)
       throw new NotFoundException(" couldn't find accepted consultations ");
       
@@ -70,11 +70,13 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
 
   async getRequests (id : string) : Promise<ConsultationEntity[]>{
     const con = await this.consultationRepository
-    .createQueryBuilder('s')
-    .where("s.acceptee = 0 AND ((s.patient = :id) OR (s.doctor = :id) ) ", {id : id})
-    .getMany();
+    .createQueryBuilder('c')
+    .where("c.acceptee = 0 AND ((c.patient = :id) OR (c.doctor = :id) ) ", {id : id})
+    .getRawMany()
+    ;
     if (!con)
       throw new NotFoundException(" couldn't find accepted consultations ");
+    
     return con ;
 
   }
