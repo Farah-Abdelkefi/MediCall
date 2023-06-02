@@ -27,11 +27,12 @@ export class ConsultationController {
     return this.consultationService.findAll();
   }
 
-  @Get('/docteranduser')
+  @Get('/:doctorId/:patientId')
   findByDocterandUser(
-    @Body() consult: CreateConsultationDto,
+    @Param('doctorId') docId : string,
+    @Param('patientId') patId : string
   ): Promise<ConsultationEntity> {
-    return this.consultationService.findBydocterandbyuser(consult);
+    return this.consultationService.findBydocterandbyuser(docId,patId);
   }
   @Get('accepted/:id')
   getAcceptedConsultation(@Param('id') id: string) {

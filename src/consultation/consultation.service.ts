@@ -41,16 +41,16 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
     return await this.consultationRepository.save(con);
   }
 
-  async findBydocterandbyuser(con : CreateConsultationDto ) : Promise <ConsultationEntity>
+  async findBydocterandbyuser(docId : string , patId : string) : Promise <ConsultationEntity>
   {
     const element = await this.consultationRepository
       .createQueryBuilder('c')
-      .where('c.doctorId = :iddoctor', { iddoctor: con.doctor })
-      .andWhere('c.patientId= :iduser', { iduser: con.patient })
+      .where('c.doctor = :iddoctor', { iddoctor: docId })
+      .andWhere('c.patient= :iduser', { iduser: patId })
       .getOne();
 
     if (!element) {
-      throw new NotFoundException('not found');
+      throw new NotFoundException('not found hahah');
     }
     return element;
     
