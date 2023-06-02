@@ -26,14 +26,6 @@ export class ConsultationController {
   findAll(): Promise<ConsultationEntity[]> {
     return this.consultationService.findAll();
   }
-
-  @Get('/:doctorId/:patientId')
-  findByDocterandUser(
-    @Param('doctorId') docId : string,
-    @Param('patientId') patId : string
-  ): Promise<ConsultationEntity> {
-    return this.consultationService.findBydocterandbyuser(docId,patId);
-  }
   @Get('accepted/:id')
   getAcceptedConsultation(@Param('id') id: string) {
     return this.consultationService.getAcceptedConsultation(id);
@@ -42,6 +34,15 @@ export class ConsultationController {
   getRequests(@Param('id') id: string) {
     return this.consultationService.getRequests(id);
   }
+
+  @Get('/:doctorId/:patientId')
+  findByDocterandUser(
+    @Param('doctorId') docId: string,
+    @Param('patientId') patId: string,
+  ): Promise<ConsultationEntity> {
+    return this.consultationService.findBydocterandbyuser(docId, patId);
+  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
