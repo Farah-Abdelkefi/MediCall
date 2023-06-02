@@ -39,7 +39,7 @@ export class ConsultationController {
   findByDocterandUser(
     @Param('doctorId') docId: string,
     @Param('patientId') patId: string,
-  ): Promise<ConsultationEntity> {
+  ): Promise<ConsultationEntity[]> {
     return this.consultationService.findBydocterandbyuser(docId, patId);
   }
 
