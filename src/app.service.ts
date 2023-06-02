@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Query, Resolver } from '@nestjs/graphql';
 
 @Injectable()
 export class AppService {
@@ -7,10 +6,4 @@ export class AppService {
     return 'Hello World!';
   }
 }
-@Resolver()
-export class FooResolver {
-  @Query(() => String)
-  sayHello(): string {
-    return 'Hello World!';
-  }
-}
+

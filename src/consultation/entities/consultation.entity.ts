@@ -20,7 +20,6 @@ export class ConsultationEntity extends TimestampEntity {
   @Column({default : 0})
   acceptee: number ;
 
-  
   @ManyToOne((type) => DoctorEntity, (doctor) => doctor.consultations)
   doctor: DoctorEntity;
   

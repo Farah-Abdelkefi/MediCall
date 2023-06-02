@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService, FooResolver } from './app.service';
+import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DoctorModule } from './doctor/doctor.module';
 import { ConsultationModule } from './consultation/consultation.module';
@@ -22,11 +22,11 @@ import { UserModule } from './user/user.module';
     }),*/
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'localhost',                  
       port: 3306,
       username: 'root',
       password: '',
-      database: 'projet-nest1',
+      database: 'projetnest',
       entities: [
         DoctorEntity,
         SpecialityEntity,

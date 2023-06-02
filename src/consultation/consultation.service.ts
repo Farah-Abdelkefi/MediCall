@@ -59,7 +59,6 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
       .where('c.acceptee = 1 AND ((c.patient = :id) OR (c.doctor = :id) ) ', {
         id: id,
       })
-      //.getRawMany();
       .getRawMany();
     if (!con)
       throw new NotFoundException(" couldn't find accepted consultations ");
@@ -81,13 +80,17 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
   }
 
   async accept(id: string, accept: UpdateConsultationDto) {
+
+// testt 
+
     const con = await this.findOne(id);
     if (!con) {
       throw new NotFoundException(" can't find id ");
     }
     con.acceptee = 1;
     con.date = new Date(accept.date);
-    con.token = this.generateToken(con).token;
+   con.token = this.generateToken(con);
+   
     const q = this.consultationRepository.save(con);
     if (!q) {
       throw new NotFoundException("couldn't update date ");
@@ -98,33 +101,30 @@ export class ConsultationService extends GenericCrudService<ConsultationEntity> 
 
   generateToken(con: ConsultationEntity) {
     // Rtc Examples
-    const appId = process.env.APP_ID;
+    const appId = '579dcf9764df40d2b0d5dd2571e659b1';
     const appCertificate = 'e879ef0eca834e24b5a05edd4729e717';
     const channelName = con.channel;
 
     const userAccount = '';
     const role = RtcRole.PUBLISHER;
 
-    const expirationTimeInSeconds = 86400;
+    const expirationTimeInSeconds = 7200;
 
-    const timestamp = con.date.getSeconds();
+    const timestamp = Math.floor(con.date.getTime()/1000) - 900;
     // const timestamp = Math.floor((con.date.getTime() - Date.now())/1000);
     const currentTimestamp = Math.floor(Date.now() / 1000);
+    const expire =expirationTimeInSeconds +  timestamp - currentTimestamp ;
     const privilegeExpiredTs = timestamp + expirationTimeInSeconds;
     // Build token with user account
-    const token = RtcTokenBuilder.buildTokenWithUserAccount(
+    return RtcTokenBuilder.buildTokenWithUserAccount(
       appId,
       appCertificate,
       channelName,
       userAccount,
       role,
-      timestamp,
+      172800,
       privilegeExpiredTs,
     );
-    return {
-      token: token,
-      appId: appId,
-      channelName: channelName,
-    };
+    
   }
 }

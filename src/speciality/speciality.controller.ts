@@ -25,12 +25,15 @@ export class SpecialityController {
   findAll() {
     return this.specialityService.findAll();
   }
-
+  @Get('ByName')
+  getByName (@Body('name') name : string){
+    return this.specialityService.getSpeciality(name);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.specialityService.findOne(id);
   }
-
+  
   @Patch(':id')
   update(
     @Param('id') id: string,
