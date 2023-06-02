@@ -14,6 +14,7 @@ import { RoleEnum } from '../Enums/role.enum';
 import { GenericCrudService } from '../Generics/service/generic-crud.service';
 import { DoctorService } from '../doctor/doctor.service';
 import { SpecialityEntity } from '../speciality/entities/speciality.entity';
+import { DoctorEntity } from 'src/doctor/entities/doctor.entity';
 
 @Injectable()
 export class UserService extends GenericCrudService<UserEntity> {
@@ -79,7 +80,7 @@ export class UserService extends GenericCrudService<UserEntity> {
       return this.IsLogged(password, doctor);
     }
   }
-  async IsLogged(password: string, user: UserEntity) {
+  async IsLogged(password: string, user: UserEntity | DoctorEntity) {
     const hashedPassword = await bcrypt.hash(password, user.salt);
     if (hashedPassword === user.password) {
       const payload = {

@@ -23,7 +23,6 @@ export class ConsultationEntity extends TimestampEntity {
   
   @ManyToOne((type) => DoctorEntity, (doctor) => doctor.consultations)
   doctor: DoctorEntity;
-
   
   @ManyToOne((type) => UserEntity, (patient) => patient.consultations)
   patient: UserEntity;

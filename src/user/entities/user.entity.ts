@@ -1,3 +1,4 @@
+import { Optional } from '@nestjs/common';
 import { RoleEnum } from 'src/Enums/role.enum';
 import { TimestampEntity } from 'src/Generics/timestamp.entity';
 import { ConsultationEntity } from 'src/consultation/entities/consultation.entity';
@@ -29,6 +30,7 @@ export class UserEntity extends TimestampEntity {
   })
   role: string;
 
+  
   @OneToMany(
     (type) => ConsultationEntity,
     (consultations) => consultations.patient,
