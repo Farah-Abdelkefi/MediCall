@@ -30,7 +30,6 @@ export class UserEntity extends TimestampEntity {
   })
   role: string;
 
-  
   @OneToMany(
     (type) => ConsultationEntity,
     (consultations) => consultations.patient,
