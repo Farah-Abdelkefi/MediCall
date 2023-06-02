@@ -11,15 +11,20 @@ export class ConsultationEntity extends TimestampEntity {
   @Column()
   channel: string;
 
+  @Column()
+  token : string;
+
   @Column({default : null})
   date: Date = null;
 
   @Column({default : 0})
   acceptee: number ;
 
+  
   @ManyToOne((type) => DoctorEntity, (doctor) => doctor.consultations)
   doctor: DoctorEntity;
 
+  
   @ManyToOne((type) => UserEntity, (patient) => patient.consultations)
   patient: UserEntity;
 }

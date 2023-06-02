@@ -26,7 +26,7 @@ import { UserModule } from './user/user.module';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'projet-nest1',
+      database: 'projetnest',
       entities: [
         DoctorEntity,
         SpecialityEntity,
