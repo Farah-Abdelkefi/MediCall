@@ -5,11 +5,8 @@ import { IsDate } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class UpdateConsultationDto extends PartialType(CreateConsultationDto) {
- 
-
   @Optional()
-  @Transform( ({ value }) => new Date(value))
+  @Transform(({ value }) => new Date(value))
   @IsDate()
   date: Date;
-
 }
